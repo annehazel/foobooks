@@ -1,16 +1,29 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/books/', 'BookController@index');
+
+Route::get('/books/{title?}', 'BookController@view');
+
+
+/* 
+ * ERROR HANDLING AND DEBUGGING
+ */
+
+    /* Laravel 5 log viewer
+     * https://github.com/rap2hpoutre/laravel-log-viewer
+     */
+    
+    if(config('app.env') == 'local'){
+        Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+    }
+
+    
+/* 
+ * PRACTICE
+ */
+
+Route::any('/practice/{n?}', 'PracticeController@index');
+
+Route::get('/', 'WelcomeController@index');
